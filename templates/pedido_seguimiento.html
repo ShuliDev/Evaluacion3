@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Seguimiento de Pedido</title>
+</head>
+<body>
+  <h1>Seguimiento de Pedido</h1>
+  <p><b>Cliente:</b> {{ pedido.cliente_nombre }}</p>
+  <p><b>Producto:</b> {{ pedido.producto.name }}</p>
+  <p><b>Descripción:</b> {{ pedido.descripcion }}</p>
+  <p><b>Estado del pedido:</b> {{ pedido.get_estado_display }}</p>
+  <p><b>Estado de pago:</b> {{ pedido.get_estado_pago_display }}</p>
+  <p><b>Plataforma:</b> {{ pedido.get_plataforma_display }}</p>
+  <p><b>Fecha solicitada:</b> {{ pedido.fecha_necesaria|default:'-' }}</p>
+  <h3>Imágenes de referencia</h3>
+  <div>
+    {% for img in imagenes %}
+      <img src="{{ img.image.url }}" alt="{{ img.alt_text }}" style="max-width:200px;max-height:200px;">
+    {% empty %}
+      <p>No hay imágenes de referencia.</p>
+    {% endfor %}
+  </div>
+  <hr>
+  <p><b>Token de seguimiento:</b> {{ pedido.token }}</p>
+  <p><a href="/">Volver al catálogo</a></p>
+</body>
+</html>

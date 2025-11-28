@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{{ producto.name }} - Detalle</title>
+</head>
+<body>
+  <h1>{{ producto.name }}</h1>
+  <p><b>Precio:</b> ${{ producto.price }}</p>
+  <p><b>Categoría:</b> {{ producto.category.name }}</p>
+  <p>{{ producto.description }}</p>
+  <div>
+    {% for img in imagenes %}
+      <img src="{{ img.image.url }}" alt="{{ img.alt_text }}" style="max-width:200px;max-height:200px;">
+    {% endfor %}
+  </div>
+  <p>
+    <a href="{% url 'index' %}">Volver al catálogo</a>
+  </p>
+  <hr>
+  <form action="/" method="get">
+    <button type="button" onclick="window.location.href='{% url 'pedido_solicitud' producto.pk %}'">Solicitar este producto</button>
+  </form>
+</body>
+</html>
