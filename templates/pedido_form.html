@@ -10,6 +10,8 @@
   <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
+    <label for="imagenes-multi">Subir varias imágenes de referencia (opcional):</label>
+    <input type="file" name="imagenes-multi" id="imagenes-multi" multiple accept="image/*">
     <button type="submit">Enviar solicitud</button>
   </form>
   <p><a href="{% url 'producto_detalle' producto.pk %}">Volver al producto</a></p>

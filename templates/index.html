@@ -8,6 +8,11 @@
 <body>
   <h1>Catálogo de Productos</h1>
   <form method="get">
+    <label for="busqueda">Buscar:</label>
+    <input type="text" name="busqueda" id="busqueda" value="{{ busqueda }}" placeholder="Nombre o descripción...">
+    <button type="submit">Buscar</button>
+  </form>
+  <form method="get" style="display:inline;">
     <label for="categoria">Filtrar por categoría:</label>
     <select name="categoria" id="categoria" onchange="this.form.submit()">
       <option value="">Todas</option>

@@ -27,13 +27,17 @@ class PedidoImageInline(admin.TabularInline):
 
 
 class PedidoAdmin(admin.ModelAdmin):
-	list_display = ('id', 'cliente_nombre', 'plataforma', 'estado', 'estado_pago', 'creado_en')
-	list_filter = ('plataforma', 'estado', 'estado_pago')
-	search_fields = ('cliente_nombre', 'email', 'telefono', 'token')
-	readonly_fields = ('token', 'creado_en', 'actualizado_en')
-	inlines = [PedidoImageInline]
+    list_display = ('id', 'cliente_nombre', 'plataforma', 'estado', 'estado_pago', 'creado_en')
+    list_filter = ('plataforma', 'estado', 'estado_pago')
+    search_fields = ('cliente_nombre', 'email', 'telefono', 'token')
+    readonly_fields = ('token', 'creado_en', 'actualizado_en')
+    inlines = [PedidoImageInline]
 
-
+    def save_model(self, request, obj, form, change):
+        # Validar que no se pueda finalizar sin pago completo
+        if obj.estado == 'finalizada' and obj.estado_pago != 'pagado':
+            raise ValueError("No se puede finalizar un pedido sin pago completo.")
+        super().save_model(request, obj, form, change)
 class InsumoAdmin(admin.ModelAdmin):
 	list_display = ('name', 'tipo', 'cantidad', 'unidad', 'marca', 'color')
 	search_fields = ('name', 'marca', 'color')
