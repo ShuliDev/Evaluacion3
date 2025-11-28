@@ -6,8 +6,35 @@
   <title>Catálogo - Tienda de Artículos Personalizados</title>
 </head>
 <body>
-  <h1>Catálogo (placeholder)</h1>
-  <p>Bienvenido. En las siguientes tareas implementaremos el catálogo, vistas de detalle y el formulario de pedidos.</p>
+  <h1>Catálogo de Productos</h1>
+  <form method="get">
+    <label for="categoria">Filtrar por categoría:</label>
+    <select name="categoria" id="categoria" onchange="this.form.submit()">
+      <option value="">Todas</option>
+      {% for cat in categorias %}
+        <option value="{{ cat.slug }}" {% if categoria_seleccionada == cat.slug %}selected{% endif %}>{{ cat.name }}</option>
+      {% endfor %}
+    </select>
+  </form>
+  <hr>
+  <div>
+    {% if productos %}
+      <ul>
+        {% for producto in productos %}
+          <li>
+            <strong>{{ producto.name }}</strong> <br>
+            {{ producto.description }} <br>
+            <b>Precio:</b> ${{ producto.price }} <br>
+            <b>Categoría:</b> {{ producto.category.name }}
+            {% if producto.featured %}<span style="color:green;">★ Destacado</span>{% endif %}
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>No hay productos en esta categoría.</p>
+    {% endif %}
+  </div>
+  <hr>
   <p><a href="/admin/">Ir al panel de administración</a></p>
 </body>
 </html>
