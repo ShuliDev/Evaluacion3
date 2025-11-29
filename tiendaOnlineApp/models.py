@@ -17,7 +17,7 @@ class Category(models.Model):
 
 class Product(models.Model):
 	name = models.CharField(max_length=200)
-	description = models.TextField(blank=True)
+	description = models.TextField(max_length=2000)
 	category = models.ForeignKey(Category, on_delete=models.PROTECT, related_name='products')
 	price = models.DecimalField(max_digits=10, decimal_places=2)
 	featured = models.BooleanField(default=False)
@@ -49,11 +49,11 @@ class ProductImage(models.Model):
 
 class Insumo(models.Model):
 	name = models.CharField(max_length=200)
-	tipo = models.CharField(max_length=100, blank=True)
+	tipo = models.CharField(max_length=100)
 	cantidad = models.DecimalField(max_digits=10, decimal_places=3)
 	unidad = models.CharField(max_length=50, blank=True)
-	marca = models.CharField(max_length=100, blank=True)
-	color = models.CharField(max_length=50, blank=True)
+	marca = models.CharField(max_length=100)
+	color = models.CharField(max_length=50)
 
 	class Meta:
 		verbose_name = 'Insumo'
@@ -90,12 +90,12 @@ PAYMENT_STATUS = [
 
 
 class Pedido(models.Model):
-	token = models.CharField(max_length=64, unique=True, blank=True, editable=False)
+	token = models.CharField(max_length=64, unique=True, editable=False)
 	cliente_nombre = models.CharField(max_length=200)
-	email = models.EmailField(blank=True)
-	telefono = models.CharField(max_length=80, blank=True)
-	producto = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True, blank=True)
-	descripcion = models.TextField(blank=True)
+	email = models.EmailField(max_length=200)
+	telefono = models.CharField(max_length=80)
+	producto = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
+	descripcion = models.TextField()
 	plataforma = models.CharField(max_length=20, choices=PLATFORM_CHOICES, default='web')
 	fecha_necesaria = models.DateField(null=True, blank=True)
 	estado = models.CharField(max_length=20, choices=ORDER_STATUS, default='solicitado')
