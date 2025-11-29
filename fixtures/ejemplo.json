@@ -1,0 +1,104 @@
+[
+  {
+    "model": "tiendaOnlineApp.category",
+    "pk": 1,
+    "fields": {
+      "name": "Poleras",
+      "slug": "poleras"
+    }
+  },
+  {
+    "model": "tiendaOnlineApp.category",
+    "pk": 2,
+    "fields": {
+      "name": "Tazones",
+      "slug": "tazones"
+    }
+  },
+  {
+    "model": "tiendaOnlineApp.category",
+    "pk": 3,
+    "fields": {
+      "name": "3D",
+      "slug": "3d"
+    }
+  },
+  {
+    "model": "tiendaOnlineApp.product",
+    "pk": 1,
+    "fields": {
+      "name": "Polera básica personalizada",
+      "description": "Polera de algodón personalizada con tu diseño.",
+      "category": 1,
+      "price": "9900.00",
+      "featured": true,
+      "foto1": null,
+      "foto2": null,
+      "foto3": null
+    }
+  },
+  {
+    "model": "tiendaOnlineApp.product",
+    "pk": 2,
+    "fields": {
+      "name": "Tazón mágico",
+      "description": "Tazón que cambia de color con el calor.",
+      "category": 2,
+      "price": "6500.00",
+      "featured": false,
+      "foto1": null,
+      "foto2": null,
+      "foto3": null
+    }
+  },
+  {
+    "model": "tiendaOnlineApp.product",
+    "pk": 3,
+    "fields": {
+      "name": "Figura 3D personalizada",
+      "description": "Impresión 3D de figuras a pedido.",
+      "category": 3,
+      "price": "15000.00",
+      "featured": true,
+      "foto1": null,
+      "foto2": null,
+      "foto3": null
+    }
+  },
+  {
+    "model": "tiendaOnlineApp.insumo",
+    "pk": 1,
+    "fields": {
+      "name": "Polera lisa blanca",
+      "tipo": "Ropa",
+      "cantidad": "50.000",
+      "unidad": "unidades",
+      "marca": "Fruit of the Loom",
+      "color": "Blanco"
+    }
+  },
+  {
+    "model": "tiendaOnlineApp.insumo",
+    "pk": 2,
+    "fields": {
+      "name": "Tazón en blanco",
+      "tipo": "Cerámica",
+      "cantidad": "30.000",
+      "unidad": "unidades",
+      "marca": "Genérico",
+      "color": "Blanco"
+    }
+  },
+  {
+    "model": "tiendaOnlineApp.insumo",
+    "pk": 3,
+    "fields": {
+      "name": "Filamento PLA",
+      "tipo": "3D",
+      "cantidad": "5.000",
+      "unidad": "kg",
+      "marca": "Prusa",
+      "color": "Rojo"
+    }
+  }
+]

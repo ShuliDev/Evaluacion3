@@ -1,16 +1,17 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Pedido recibido</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <title>Pedido recibido</title>
 </head>
 <body>
-  <h1>¡Solicitud recibida!</h1>
-  <p>Tu pedido ha sido registrado correctamente.</p>
-  <p>Tu código de seguimiento es: <b>{{ pedido.token }}</b></p>
-  <p>Puedes consultar el estado de tu pedido en cualquier momento usando tu URL de seguimiento:</p>
-  <p><a href="{% url 'pedido_seguimiento' pedido.token %}">{{ request.build_absolute_uri|default:'' }}seguimiento/{{ pedido.token }}/</a></p>
-  <p><a href="/">Volver al catálogo</a></p>
+    <h1>¡Solicitud recibida!</h1>
+    <p>Tu pedido ha sido registrado correctamente.</p>
+    <p>Tu código de seguimiento es: <b>{{ pedido.token }}</b></p>
+    <p>Puedes consultar el estado de tu pedido en cualquier momento usando tu URL de seguimiento:</p>
+    <p><a href="{% url 'pedido_seguimiento' pedido.token %}">{{ request.build_absolute_uri|default:'' }}seguimiento/{{ pedido.token }}/</a></p>
+    <p><a href="/">Volver al catálogo</a></p>
 </body>
 </html>

@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.utils.html import format_html
 import uuid
 
 
@@ -21,6 +22,9 @@ class Product(models.Model):
 	category = models.ForeignKey(Category, on_delete=models.PROTECT, related_name='products')
 	price = models.DecimalField(max_digits=10, decimal_places=2)
 	featured = models.BooleanField(default=False)
+	foto1 = models.ImageField(upload_to='productos', null=True, blank=True)
+	foto2 = models.ImageField(upload_to='productos', null=True, blank=True)
+	foto3 = models.ImageField(upload_to='productos', null=True, blank=True)
 
 	class Meta:
 		verbose_name = 'Producto'
@@ -28,23 +32,6 @@ class Product(models.Model):
 
 	def __str__(self):
 		return self.name
-
-
-def product_image_upload_to(instance, filename):
-	return f'products/{instance.product.id}/{filename}'
-
-
-class ProductImage(models.Model):
-	product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='images')
-	image = models.ImageField(upload_to=product_image_upload_to)
-	alt_text = models.CharField(max_length=150, blank=True)
-
-	class Meta:
-		verbose_name = 'Imagen de producto'
-		verbose_name_plural = 'Imágenes de producto'
-
-	def __str__(self):
-		return f"Imagen #{self.id} - {self.product.name}"
 
 
 class Insumo(models.Model):
@@ -98,6 +85,7 @@ class Pedido(models.Model):
 	descripcion = models.TextField()
 	plataforma = models.CharField(max_length=20, choices=PLATFORM_CHOICES, default='web')
 	fecha_necesaria = models.DateField(null=True, blank=True)
+	foto_referencia = models.ImageField(upload_to='pedidos', null=True, blank=True)
 	estado = models.CharField(max_length=20, choices=ORDER_STATUS, default='solicitado')
 	estado_pago = models.CharField(max_length=20, choices=PAYMENT_STATUS, default='pendiente')
 	creado_en = models.DateTimeField(default=timezone.now)
@@ -112,24 +100,7 @@ class Pedido(models.Model):
 
 	def save(self, *args, **kwargs):
 		if not self.token:
-			# generar un token único
 			self.token = uuid.uuid4().hex
 		super().save(*args, **kwargs)
 
-
-def pedido_image_upload_to(instance, filename):
-	return f'pedidos/{instance.pedido.id}/{filename}'
-
-
-class PedidoImage(models.Model):
-	pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE, related_name='images')
-	image = models.ImageField(upload_to=pedido_image_upload_to)
-	alt_text = models.CharField(max_length=150, blank=True)
-
-	class Meta:
-		verbose_name = 'Imagen de pedido'
-		verbose_name_plural = 'Imágenes de pedido'
-
-	def __str__(self):
-		return f"Imagen #{self.id} - Pedido {self.pedido.id}"
 

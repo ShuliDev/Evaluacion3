@@ -1,26 +1,33 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>{{ producto.name }} - Detalle</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <title>{{ producto.name }} - Detalle</title>
 </head>
 <body>
-  <h1>{{ producto.name }}</h1>
-  <p><b>Precio:</b> ${{ producto.price }}</p>
-  <p><b>Categoría:</b> {{ producto.category.name }}</p>
-  <p>{{ producto.description }}</p>
-  <div>
-    {% for img in imagenes %}
-      <img src="{{ img.image.url }}" alt="{{ img.alt_text }}" style="max-width:200px;max-height:200px;">
-    {% endfor %}
-  </div>
-  <p>
-    <a href="{% url 'index' %}">Volver al catálogo</a>
-  </p>
-  <hr>
-  <form action="/" method="get">
-    <button type="button" onclick="window.location.href='{% url 'pedido_solicitud' producto.pk %}'">Solicitar este producto</button>
-  </form>
+    <h1>{{ producto.name }}</h1>
+    <p><b>Precio:</b> ${{ producto.price }}</p>
+    <p><b>Categoría:</b> {{ producto.category.name }}</p>
+    <p>{{ producto.description }}</p>
+    <div>
+        {% if producto.foto1 %}
+            <img src="{{ producto.foto1.url }}" alt="Foto 1" style="max-width:200px;max-height:200px;">
+        {% endif %}
+        {% if producto.foto2 %}
+            <img src="{{ producto.foto2.url }}" alt="Foto 2" style="max-width:200px;max-height:200px;">
+        {% endif %}
+        {% if producto.foto3 %}
+            <img src="{{ producto.foto3.url }}" alt="Foto 3" style="max-width:200px;max-height:200px;">
+        {% endif %}
+    </div>
+    <p>
+        <a href="{% url 'index' %}">Volver al catálogo</a>
+    </p>
+    <hr>
+    <form action="/" method="get">
+        <button type="button" onclick="window.location.href='{% url 'pedido_solicitud' producto.pk %}'">Solicitar este producto</button>
+    </form>
 </body>
 </html>

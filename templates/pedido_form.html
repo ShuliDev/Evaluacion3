@@ -1,19 +1,18 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Solicitar {{ producto.name }}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <title>Solicitar {{ producto.name }}</title>
 </head>
 <body>
-  <h1>Solicitar: {{ producto.name }}</h1>
-  <form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <label for="imagenes-multi">Subir varias imágenes de referencia (opcional):</label>
-    <input type="file" name="imagenes-multi" id="imagenes-multi" multiple accept="image/*">
-    <button type="submit">Enviar solicitud</button>
-  </form>
-  <p><a href="{% url 'producto_detalle' producto.pk %}">Volver al producto</a></p>
+    <h1>Solicitar: {{ producto.name }}</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Enviar solicitud</button>
+    </form>
+    <p><a href="{% url 'producto_detalle' producto.pk %}">Volver al producto</a></p>
 </body>
 </html>

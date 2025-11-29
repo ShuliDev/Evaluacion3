@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django import forms
-from .models import Product, Category, Pedido, PedidoImage
+from .models import Product, Category, Pedido
 
 
 def index(request):
@@ -22,22 +22,15 @@ def index(request):
 
 def producto_detalle(request, pk):
     producto = get_object_or_404(Product, pk=pk)
-    imagenes = producto.images.all()
     return render(request, 'producto_detalle.html', {
         'producto': producto,
-        'imagenes': imagenes,
     })
 
 
 class PedidoForm(forms.ModelForm):
-    imagenes = forms.FileField(
-        required=False,
-        label="Imágenes de referencia"
-    )
-
     class Meta:
         model = Pedido
-        fields = ['cliente_nombre', 'email', 'telefono', 'descripcion', 'fecha_necesaria']
+        fields = ['cliente_nombre', 'email', 'telefono', 'descripcion', 'fecha_necesaria', 'foto_referencia']
         widgets = {
             'fecha_necesaria': forms.DateInput(attrs={'type': 'date'}),
         }
@@ -54,10 +47,6 @@ def pedido_solicitud(request, producto_id):
             pedido.estado = 'solicitado'
             pedido.estado_pago = 'pendiente'
             pedido.save()
-            # Guardar múltiples imágenes de referencia
-            imagenes = request.FILES.getlist('imagenes-multi')
-            for img in imagenes:
-                PedidoImage.objects.create(pedido=pedido, image=img)
             return render(request, 'pedido_exito.html', {'pedido': pedido})
     else:
         form = PedidoForm()
@@ -66,8 +55,6 @@ def pedido_solicitud(request, producto_id):
 
 def pedido_seguimiento(request, token):
     pedido = get_object_or_404(Pedido, token=token)
-    imagenes = pedido.images.all()
     return render(request, 'pedido_seguimiento.html', {
         'pedido': pedido,
-        'imagenes': imagenes,
     })

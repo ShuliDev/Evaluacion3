@@ -1,47 +1,52 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Catálogo - Tienda de Artículos Personalizados</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Catálogo - Tienda de Artículos Personalizados</title>
 </head>
 <body>
-  <h1>Catálogo de Productos</h1>
-  <form method="get">
-    <label for="busqueda">Buscar:</label>
-    <input type="text" name="busqueda" id="busqueda" value="{{ busqueda }}" placeholder="Nombre o descripción...">
-    <button type="submit">Buscar</button>
-  </form>
-  <form method="get" style="display:inline;">
-    <label for="categoria">Filtrar por categoría:</label>
-    <select name="categoria" id="categoria" onchange="this.form.submit()">
-      <option value="">Todas</option>
-      {% for cat in categorias %}
-        <option value="{{ cat.slug }}" {% if categoria_seleccionada == cat.slug %}selected{% endif %}>{{ cat.name }}</option>
-      {% endfor %}
-    </select>
-  </form>
-  <hr>
-  <div>
-    {% if productos %}
-      <ul>
-        {% for producto in productos %}
-          <li>
-            <a href="{% url 'producto_detalle' producto.pk %}"><strong>{{ producto.name }}</strong></a> <br>
-            {{ producto.description }} <br>
-            <b>Precio:</b> ${{ producto.price }} <br>
-            <b>Categoría:</b> {{ producto.category.name }}
-            {% if producto.featured %}<span style="color:green;">★ Destacado</span>{% endif %}
-            <br>
-            <a href="{% url 'producto_detalle' producto.pk %}">Ver detalle</a>
-          </li>
-        {% endfor %}
-      </ul>
-    {% else %}
-      <p>No hay productos en esta categoría.</p>
-    {% endif %}
-  </div>
-  <hr>
-  <p><a href="/admin/">Ir al panel de administración</a></p>
+    <h1>Catálogo de Productos</h1>
+    <form method="get">
+        <label for="busqueda">Buscar:</label>
+        <input type="text" name="busqueda" id="busqueda" value="{{ busqueda }}" placeholder="Nombre o descripción...">
+        <button type="submit">Buscar</button>
+    </form>
+    <form method="get" style="display:inline;">
+        <label for="categoria">Filtrar por categoría:</label>
+        <select name="categoria" id="categoria" onchange="this.form.submit()">
+            <option value="">Todas</option>
+            {% for cat in categorias %}
+                <option value="{{ cat.slug }}" {% if categoria_seleccionada == cat.slug %}selected{% endif %}>{{ cat.name }}</option>
+            {% endfor %}
+        </select>
+    </form>
+    <hr>
+    <div>
+        {% if productos %}
+        <ul>
+            {% for producto in productos %}
+            <li>
+                <a href="{% url 'producto_detalle' producto.pk %}"><strong>{{ producto.name }}</strong></a> 
+                <b>Precio:</b> ${{ producto.price }} <br>
+                <b>Categoría:</b> {{ producto.category.name }}
+                {% if producto.featured %}<span style="color:green;">★ Destacado</span>{% endif %}
+                <br>
+                <div class="row">
+                {% if producto.foto1 %}
+                <img src="{{ producto.foto1.url }}" alt="" style="max-width:300px; max-height:300px;">
+                {% endif %}
+                <a href="{% url 'producto_detalle' producto.pk %}">Ver detalle</a>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+            <p>No hay productos en esta categoría.</p>
+        {% endif %}
+    </div>
+    <hr>
+    <p><a href="/admin/">Ir al panel de administración</a></p>
 </body>
 </html>
