@@ -37,12 +37,33 @@
                 <label for="fecha_necesaria" class="form-label">Fecha preferida (opcional)</label>
                 <input type="date" class="form-control" name="fecha_necesaria" id="fecha_necesaria">
             </div>
-            
+
             <div class="mb-3">
-                <label for="foto_referencia" class="form-label">Imagen/es de referencia *</label>
-                <input type="file" class="form-control" name="foto_referencia" id="foto_referencia" accept="image/*">
+                <label for="plataforma" class="form-label">Plataforma de pedido *</label>
+                <select name="plataforma" id="id_plataforma">
+                    <option value="web" selected>Sitio Web</option>
+                    <option value="facebook">Facebook</option>
+                    <option value="instagram">Instagram</option>
+                    <option value="whatsapp">WhatsApp</option>
+                    <option value="presencial">Presencial</option>
+                    <option value="otra">Otra</option>
+                </select>
             </div>
             
+            <div class="mb-3">
+                <label for="foto_referencia1" class="form-label">Imagen de referencia *</label>
+                <input type="file" class="form-control" name="foto_referencia1" id="foto_referencia1" accept="image/*">
+            </div>
+            
+            <div class="mb-3">
+                <label for="foto_referencia2" class="form-label">Segunda imagen de referencia (opcional)</label>
+                <input type="file" class="form-control" name="foto_referencia2" id="foto_referencia2" accept="image/*">
+            </div>
+
+            <div class="mb-3">
+                <label for="foto_referencia3" class="form-label">Tercera imagen de referencia (opcional)</label>
+                <input type="file" class="form-control" name="foto_referencia3" id="foto_referencia3" accept="image/*">
+            </div>
             <button type="submit" class="btn btn-primary">Enviar solicitud</button>
         </form>
         <hr>

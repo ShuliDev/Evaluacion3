@@ -27,8 +27,8 @@ class PedidoAdmin(admin.ModelAdmin):
 	readonly_fields = ('token', 'creado_en', 'actualizado_en')
 
 	def vista_foto(self, obj):
-		if obj.foto_referencia:
-			return format_html("<img src={} width=50 height=50 />", obj.foto_referencia.url)
+		if obj.foto_referencia1:
+			return format_html("<img src={} width=50 height=50 />", obj.foto_referencia1.url)
 		return "-"
 	vista_foto.short_description = "Foto Referencia"
 

@@ -30,7 +30,7 @@ def producto_detalle(request, pk):
 class PedidoForm(forms.ModelForm):
     class Meta:
         model = Pedido
-        fields = ['cliente_nombre', 'email', 'telefono', 'descripcion', 'fecha_necesaria', 'foto_referencia']
+        fields = ['cliente_nombre', 'email', 'telefono', 'descripcion', 'fecha_necesaria', 'foto_referencia1', 'foto_referencia2', 'foto_referencia3', 'plataforma']
         widgets = {
             'fecha_necesaria': forms.DateInput(attrs={'type': 'date'}),
         }
@@ -43,7 +43,7 @@ def pedido_solicitud(request, producto_id):
         if form.is_valid():
             pedido = form.save(commit=False)
             pedido.producto = producto
-            pedido.plataforma = 'web'
+            pedido.plataforma = pedido.plataforma or 'web'
             pedido.estado = 'solicitado'
             pedido.estado_pago = 'pendiente'
             pedido.save()

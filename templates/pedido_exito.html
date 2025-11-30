@@ -7,11 +7,29 @@
     <title>Pedido recibido</title>
 </head>
 <body>
-    <h1>¡Solicitud recibida!</h1>
-    <p>Tu pedido ha sido registrado correctamente.</p>
-    <p>Tu código de seguimiento es: <b>{{ pedido.token }}</b></p>
-    <p>Puedes consultar el estado de tu pedido en cualquier momento usando tu URL de seguimiento:</p>
-    <p><a href="{% url 'pedido_seguimiento' pedido.token %}">{{ request.build_absolute_uri|default:'' }}seguimiento/{{ pedido.token }}/</a></p>
-    <p><a href="/">Volver al catálogo</a></p>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <h4 class="alert-heading">¡Solicitud recibida!</h4>
+                    <p>Tu pedido ha sido registrado correctamente.</p>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <div class="card">
+                    <div class="card-header bg-success text-white">
+                        <h5 class="mb-0">Código de Seguimiento</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-break"><code class="fs-5">{{ pedido.token }}</code></p>
+                        <small class="text-muted">Guarda este código para hacer seguimiento a tu pedido en cualquier momento.</small>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <a href="{% url 'pedido_seguimiento' pedido.token %}" class="btn btn-primary w-100 mb-2">Ver Detalles del Pedido</a>
+                    <a href="{% url 'index' %}" class="btn btn-secondary w-100">Volver al Catálogo</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

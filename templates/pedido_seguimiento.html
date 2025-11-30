@@ -7,24 +7,75 @@
     <title>Seguimiento de Pedido</title>
 </head>
 <body>
-    <h1>Seguimiento de Pedido</h1>
-    <p><b>Cliente:</b> {{ pedido.cliente_nombre }}</p>
-    <p><b>Producto:</b> {{ pedido.producto.name }}</p>
-    <p><b>Descripción:</b> {{ pedido.descripcion }}</p>
-    <p><b>Estado del pedido:</b> {{ pedido.get_estado_display }}</p>
-    <p><b>Estado de pago:</b> {{ pedido.get_estado_pago_display }}</p>
-    <p><b>Plataforma:</b> {{ pedido.get_plataforma_display }}</p>
-    <p><b>Fecha preferida:</b> {{ pedido.fecha_necesaria|default:'-' }}</p>
-    <h3>Imagen de referencia</h3>
-    <div>
-        {% if pedido.foto_referencia %}
-            <img src="{{ pedido.foto_referencia.url }}" alt="Referencia" style="max-width:200px;max-height:200px;">
-        {% else %}
-            <p>No hay imagen de referencia.</p>
-        {% endif %}
+    <div class="container mt-5">
+        <h1>Seguimiento de Pedido</h1>
+        <hr>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card mb-4">
+                    <div class="card-header bg-info text-white">
+                        <h5 class="mb-0">Información del Pedido</h5>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Cliente:</strong> {{ pedido.cliente_nombre }}</p>
+                        <p><strong>Email:</strong> {{ pedido.email }}</p>
+                        <p><strong>Teléfono:</strong> {{ pedido.telefono }}</p>
+                        <p><strong>Producto:</strong> {{ pedido.producto.name }}</p>
+                        <p><strong>Descripción:</strong> {{ pedido.descripcion }}</p>
+                        <p><strong>Fecha solicitada:</strong> {{ pedido.fecha_necesaria|default:"Sin fecha" }}</p>
+                        <p><strong>Plataforma:</strong> {{ pedido.get_plataforma_display }}</p>
+                    </div>
+                </div>
+                <div class="card mb-4">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0">Estado del Pedido</h5>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Estado:</strong> <span class="badge bg-warning">{{ pedido.get_estado_display }}</span></p>
+                        <p><strong>Estado de pago:</strong> <span class="badge bg-success">{{ pedido.get_estado_pago_display }}</span></p>
+                    </div>
+                </div>
+                <div class="card mb-4">
+                    <div class="card-header bg-secondary text-white">
+                        <h5 class="mb-0">Imágenes de Referencia</h5>
+                    </div>
+                    <div class="card-body">
+                        {% if pedido.foto_referencia1 or pedido.foto_referencia2 or pedido.foto_referencia3 %}
+                            <div class="row">
+                                {% if pedido.foto_referencia1 %}
+                                    <div class="col-md-6 mb-2">
+                                        <img src="{{ pedido.foto_referencia1.url }}" class="img-fluid rounded" style="max-width: 400px; max-height: 400px;" alt="Referencia 1">
+                                    </div>
+                                {% endif %}
+                                {% if pedido.foto_referencia2 %}
+                                    <div class="col-md-6 mb-2">
+                                        <img src="{{ pedido.foto_referencia2.url }}" class="img-fluid rounded" style="max-width: 400px; max-height: 400px;" alt="Referencia 2">
+                                    </div>
+                                {% endif %}
+                                {% if pedido.foto_referencia3 %}
+                                    <div class="col-md-6 mb-2">
+                                        <img src="{{ pedido.foto_referencia3.url }}" class="img-fluid rounded" style="max-width: 400px; max-height: 400px;" alt="Referencia 3">
+                                    </div>
+                                {% endif %}
+                            </div>
+                        {% else %}
+                            <p class="text-muted">No hay imágenes de referencia.</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card sticky-top">
+                    <div class="card-header bg-dark text-white">
+                        <h5 class="mb-0">Token de Seguimiento</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-break"><code>{{ pedido.token }}</code></p>
+                        <a href="{% url 'index' %}" class="btn btn-secondary w-100">Volver al catálogo</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <hr>
-    <p><b>Token de seguimiento:</b> {{ pedido.token }}</p>
-    <p><a href="/">Volver al catálogo</a></p>
 </body>
 </html>

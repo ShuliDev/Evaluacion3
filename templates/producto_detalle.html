@@ -7,27 +7,37 @@
     <title>{{ producto.name }} - Detalle</title>
 </head>
 <body>
-    <h1>{{ producto.name }}</h1>
-    <p><b>Precio:</b> ${{ producto.price }}</p>
-    <p><b>Categoría:</b> {{ producto.category.name }}</p>
-    <p>{{ producto.description }}</p>
-    <div>
-        {% if producto.foto1 %}
-            <img src="{{ producto.foto1.url }}" alt="Foto 1" style="max-width:300px;max-height:300px;">
-        {% endif %}
-        {% if producto.foto2 %}
-            <img src="{{ producto.foto2.url }}" alt="Foto 2" style="max-width:300px;max-height:300px;">
-        {% endif %}
-        {% if producto.foto3 %}
-            <img src="{{ producto.foto3.url }}" alt="Foto 3" style="max-width:300px;max-height:300px;">
-        {% endif %}
+    <div class="container mt-5">
+        <h1>{{ producto.name }}</h1>
+        <hr>
+        <div class="row">
+            <div class="col-md-8">
+                <p><strong>Precio:</strong> ${{ producto.price }}</p>
+                <p><strong>Categoría:</strong> {{ producto.category.name }}</p>
+                <p>{{ producto.description }}</p>
+                <div class="mb-4">
+                    {% if producto.foto1 %}
+                        <img src="{{ producto.foto1.url }}" class="img-fluid rounded mb-2" style="max-width: 400px; max-height: 400px;" alt="Foto 1">
+                    {% endif %}
+                    {% if producto.foto2 %}
+                        <img src="{{ producto.foto2.url }}" class="img-fluid rounded mb-2" style="max-width: 400px; max-height: 400px;" alt="Foto 2">
+                    {% endif %}
+                    {% if producto.foto3 %}
+                        <img src="{{ producto.foto3.url }}" class="img-fluid rounded" style="max-width: 400px; max-height: 400px;" alt="Foto 3">
+                    {% endif %}
+                </div>
+                <a href="{% url 'index' %}" class="btn btn-secondary">Volver al catálogo</a>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Realizar solicitud</h5>
+                        <p class="card-text">Haz clic para solicitar este producto personalizado.</p>
+                        <a href="{% url 'pedido_solicitud' producto.pk %}" class="btn btn-primary w-100">Solicitar este producto</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <p>
-        <a href="{% url 'index' %}">Volver al catálogo</a>
-    </p>
-    <hr>
-    <form action="/" method="get">
-        <button type="button" onclick="window.location.href='{% url 'pedido_solicitud' producto.pk %}'">Solicitar este producto</button>
-    </form>
 </body>
 </html>
