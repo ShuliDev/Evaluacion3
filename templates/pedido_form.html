@@ -7,12 +7,46 @@
     <title>Solicitar {{ producto.name }}</title>
 </head>
 <body>
-    <h1>Solicitar: {{ producto.name }}</h1>
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Enviar solicitud</button>
-    </form>
-    <p><a href="{% url 'producto_detalle' producto.pk %}">Volver al producto</a></p>
+    <div class="container mt-5">
+        <h1>Solicitar: {{ producto.name }}</h1>
+        <hr>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            <div class="mb-3">
+                <label for="cliente_nombre" class="form-label">Nombre del cliente *</label>
+                <input type="text" class="form-control" name="cliente_nombre" id="cliente_nombre" required>
+            </div>
+            
+            <div class="mb-3">
+                <label for="email" class="form-label">Email *</label>
+                <input type="email" class="form-control" name="email" id="email" required>
+            </div>
+            
+            <div class="mb-3">
+                <label for="telefono" class="form-label">Teléfono *</label>
+                <input type="text" class="form-control" name="telefono" id="telefono" required>
+            </div>
+            
+            <div class="mb-3">
+                <label for="descripcion" class="form-label">Descripción *</label>
+                <textarea class="form-control" name="descripcion" id="descripcion" rows="4" required></textarea>
+            </div>
+            
+            <div class="mb-3">
+                <label for="fecha_necesaria" class="form-label">Fecha preferida (opcional)</label>
+                <input type="date" class="form-control" name="fecha_necesaria" id="fecha_necesaria">
+            </div>
+            
+            <div class="mb-3">
+                <label for="foto_referencia" class="form-label">Imagen/es de referencia *</label>
+                <input type="file" class="form-control" name="foto_referencia" id="foto_referencia" accept="image/*">
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Enviar solicitud</button>
+        </form>
+        <hr>
+        <p><a href="{% url 'producto_detalle' producto.pk %}">Volver al producto</a></p>
+    </div>
 </body>
 </html>

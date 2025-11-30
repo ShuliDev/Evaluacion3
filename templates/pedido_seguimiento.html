@@ -14,7 +14,7 @@
     <p><b>Estado del pedido:</b> {{ pedido.get_estado_display }}</p>
     <p><b>Estado de pago:</b> {{ pedido.get_estado_pago_display }}</p>
     <p><b>Plataforma:</b> {{ pedido.get_plataforma_display }}</p>
-    <p><b>Fecha solicitada:</b> {{ pedido.fecha_necesaria|default:'-' }}</p>
+    <p><b>Fecha preferida:</b> {{ pedido.fecha_necesaria|default:'-' }}</p>
     <h3>Imagen de referencia</h3>
     <div>
         {% if pedido.foto_referencia %}
