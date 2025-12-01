@@ -6,17 +6,28 @@ from .models import Product, Category, Pedido
 def index(request):
     categoria_slug = request.GET.get('categoria')
     busqueda = request.GET.get('busqueda', '')
+    precio_min = request.GET.get('precio_min')
+    precio_max = request.GET.get('precio_max')
     categorias = Category.objects.all()
     productos = Product.objects.all()
+
     if categoria_slug:
         productos = productos.filter(category__slug=categoria_slug)
     if busqueda:
         productos = productos.filter(name__icontains=busqueda) | productos.filter(description__icontains=busqueda)
+    if precio_min:
+        productos = productos.filter(price__gte=float(precio_min))
+    if precio_max:
+        productos = productos.filter(price__lte=float(precio_max))
+        
+        
     return render(request, 'index.html', {
         'productos': productos,
         'categorias': categorias,
         'categoria_seleccionada': categoria_slug,
         'busqueda': busqueda,
+        'precio_min': precio_min,
+        'precio_max': precio_max,
     })
 
 

@@ -16,6 +16,14 @@
                     <div class="input-group">
                         <input type="text" name="busqueda" id="busqueda" value="{{ busqueda }}" placeholder="Buscar..." class="form-control">
                         <button type="submit" class="btn btn-primary">Buscar</button>
+                        <div class="row g-2 mb-3">
+                            <div class="col-md-6">
+                                <input type="number" class="form-control" name="precio_min" placeholder="Precio mínimo" value="{{ precio_min }}">
+                            </div>
+                            <div class="col-md-6">
+                                <input type="number" class="form-control" name="precio_max" placeholder="Precio máximo" value="{{ precio_max }}">
+                            </div>
+                        </div>
                     </div>
                 </form>
             </div>

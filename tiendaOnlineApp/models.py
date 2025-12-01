@@ -22,9 +22,9 @@ class Product(models.Model):
 	category = models.ForeignKey(Category, on_delete=models.PROTECT, related_name='products')
 	price = models.DecimalField(max_digits=10, decimal_places=2)
 	featured = models.BooleanField(default=False)
-	foto1 = models.ImageField(upload_to='productos', null=True, blank=True)
-	foto2 = models.ImageField(upload_to='productos', null=True, blank=True)
-	foto3 = models.ImageField(upload_to='productos', null=True, blank=True)
+	foto1 = models.ImageField(upload_to='productos', null=True, max_length=1000)
+	foto2 = models.ImageField(upload_to='productos', null=True, blank=True, max_length=1000)
+	foto3 = models.ImageField(upload_to='productos', null=True, blank=True, max_length=1000)
 
 	class Meta:
 		verbose_name = 'Producto'
@@ -85,9 +85,9 @@ class Pedido(models.Model):
 	descripcion = models.TextField()
 	plataforma = models.CharField(max_length=20, choices=PLATFORM_CHOICES, default='web')
 	fecha_necesaria = models.DateField(null=True, blank=True)
-	foto_referencia1 = models.ImageField(upload_to='pedidos', null=True)
-	foto_referencia2 = models.ImageField(upload_to='pedidos', null=True, blank=True)
-	foto_referencia3 = models.ImageField(upload_to='pedidos', null=True, blank=True)
+	foto_referencia1 = models.ImageField(upload_to='pedidos', null=True, max_length=1000)
+	foto_referencia2 = models.ImageField(upload_to='pedidos', null=True, blank=True, max_length=1000)
+	foto_referencia3 = models.ImageField(upload_to='pedidos', null=True, blank=True, max_length=1000)
 	estado = models.CharField(max_length=20, choices=ORDER_STATUS, default='solicitado')
 	estado_pago = models.CharField(max_length=20, choices=PAYMENT_STATUS, default='pendiente')
 	creado_en = models.DateTimeField(default=timezone.now)
